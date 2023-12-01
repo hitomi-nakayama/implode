@@ -1,0 +1,14 @@
+#!/bin/bash
+# Create directories using filenames and moves the files into their respective
+# folders
+
+set -o errexit -o nounset
+# https://unix.stackexchange.com/a/139520/451354
+
+shopt -s failglob
+
+for file in *.*
+do
+    dir="${file%%.*}"
+    mkdir -- "${dir}" && mv -- "${file}" "${dir}"
+done
